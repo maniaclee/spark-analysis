@@ -59,6 +59,7 @@ class UserBehaviorMsgProducer(brokers: String, topic: String) extends Runnable {
   def sendMessage(message: String) = {
     try {
       val data = new KeyedMessage[String, String](this.topic, message);
+      print(this.topic)
       producer.send(data);
     } catch {
       case e:Exception => println(e)

@@ -27,13 +27,14 @@ object WebPagePopularityValueCalculator {
       //kafka message consumer group ID
       msgConsumerGroup,
       //Map of (topic_name -> numPartitions) to consume. Each partition is consumed in its own thread
-      Map("user-behavior-topic" -> 3))
+      Map("user-behavior-topic" -> 1))
     val msgDataRDD = kafkaStream.map(_._2)
     //for debug use only
     //println("Coming data in this interval...")
     //msgDataRDD.print()
     // e.g page37|5|1.5119122|-1
     val popularityData = msgDataRDD.map { msgLine => {
+      println(msgLine)
       val dataArr: Array[String] = msgLine.split("\\|")
       val pageID = dataArr(0)
       //calculate the popularity value
